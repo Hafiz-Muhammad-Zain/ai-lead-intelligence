@@ -92,12 +92,23 @@ export async function POST(req: NextRequest) {
     if (updateError) throw updateError
 
     // Trigger WhatsApp follow-up for hot leads via n8n
+    console.log('N8N_WEBHOOK_URL:', process.env.N8N_WEBHOOK_URL)
+    console.log('score:', scoring.score, 'phone:', phone)
     if (scoring.score >= 70 && process.env.N8N_WEBHOOK_URL && phone) {
-      fetch(process.env.N8N_WEBHOOK_URL, {
+      const webhookUrl = process.env.N8N_WEBHOOK_URL
+      console.log('Calling n8n webhook:', webhookUrl)
+      fetch(webhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, phone, company, message, score: scoring.score }),
-      }).catch(() => {})
+      })
+        .then(async (res) => {
+          const text = await res.text()
+          console.log('n8n response status:', res.status, 'body:', text)
+        })
+        .catch((err) => {
+          console.error('n8n webhook error:', err)
+        })
     }
 
     return NextResponse.json({ success: true, score: scoring.score, stage })
