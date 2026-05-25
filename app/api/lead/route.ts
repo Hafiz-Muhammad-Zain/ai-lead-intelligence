@@ -91,6 +91,15 @@ export async function POST(req: NextRequest) {
 
     if (updateError) throw updateError
 
+    // Trigger WhatsApp follow-up for hot leads via n8n
+    if (scoring.score >= 70 && process.env.N8N_WEBHOOK_URL && phone) {
+      fetch(process.env.N8N_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, company, message, score: scoring.score }),
+      }).catch(() => {})
+    }
+
     return NextResponse.json({ success: true, score: scoring.score, stage })
   } catch (err) {
     console.error('Lead API error:', err)
