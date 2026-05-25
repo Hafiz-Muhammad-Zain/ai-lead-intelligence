@@ -126,11 +126,17 @@ export default function LeadCapture() {
             {loading ? 'Submitting...' : 'Submit Lead'}
           </button>
 
-          <p className="text-center text-gray-600 text-sm">
+          <div className="flex justify-center gap-6 text-sm">
             <Link href="/dashboard" className="text-gray-500 hover:text-gray-300 transition-colors">
               View dashboard →
             </Link>
-          </p>
+            <Link href="/how-it-works" className="text-gray-500 hover:text-gray-300 transition-colors">
+              How it works →
+            </Link>
+            <Link href="/tech-stack" className="text-gray-500 hover:text-gray-300 transition-colors">
+              Tech stack →
+            </Link>
+          </div>
         </form>
       </div>
     </div>
