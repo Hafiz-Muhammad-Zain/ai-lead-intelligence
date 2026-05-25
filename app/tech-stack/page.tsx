@@ -210,7 +210,7 @@ export default function TechStack() {
           <h2 className="text-2xl font-bold mb-6">Infrastructure</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
-              { name: 'Hetzner VPS (CX22)', role: 'n8n self-hosting', detail: '2 vCPU, 4GB RAM, €4.51/month. Running Coolify for container management.' },
+              { name: 'Hetzner VPS (CX23)', role: 'n8n self-hosting', detail: '2 vCPU, 4GB RAM, €4.75/month. Running Coolify for container management.' },
               { name: 'Coolify', role: 'Container orchestration', detail: 'Self-hosted PaaS. Manages n8n Docker container, SSL certificates, reverse proxy.' },
               { name: 'Vercel', role: 'Frontend + API hosting', detail: 'Next.js deployment. Automatic deploys from GitHub main branch. Global CDN.' },
               { name: 'Supabase Cloud', role: 'Managed database', detail: 'Free tier. Postgres 15. REST API auto-generated from schema. Row Level Security.' },
